@@ -1,0 +1,23 @@
+{
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "Name": "Immersive Dialogue Display",
+  "Author": "Madi Ostoja",
+  "Version": "0.1.0",
+  "Description": "Immersive dialogue UI with large frameless portraits and compact dialogue boxes",
+  "UniqueID": "heyitsmads.ImmersiveDialogueDisplay",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": [
+    "GitHub:madeleineostoja/stardew-immersive-dialogue-display"
+  ],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher",
+    "MinimumVersion": "2.9.0"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "aedenthorn.DialogueDisplayFramework",
+      "MinimumVersion": "0.5.0",
+      "IsRequired": true
+    }
+  ]
+}

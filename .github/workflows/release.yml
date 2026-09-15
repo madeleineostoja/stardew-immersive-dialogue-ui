@@ -1,0 +1,88 @@
+name: Package and Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate content pack
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          manifest = json.loads(Path("manifest.json").read_text())
+          content = json.loads(Path("content.json").read_text())
+
+          assert manifest["UniqueID"] == "heyitsmads.ImmersiveDialogueDisplay"
+          assert re.fullmatch(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?", manifest["Version"])
+          assert manifest["ContentPackFor"]["UniqueID"] == "Pathoschild.ContentPatcher"
+          assert any(
+              dependency["UniqueID"] == "aedenthorn.DialogueDisplayFramework"
+              and dependency.get("IsRequired") is True
+              for dependency in manifest["Dependencies"]
+          )
+          assert content["Changes"][0]["Entries"]["default"]["packName"] == manifest["UniqueID"]
+          PY
+
+      - name: Stage mod files
+        run: |
+          rm -rf dist ImmersiveDialogueDisplay
+          mkdir -p dist ImmersiveDialogueDisplay
+          cp manifest.json content.json README.md ImmersiveDialogueDisplay/
+          cp -R i18n ImmersiveDialogueDisplay/
+
+      - name: Zip mod
+        run: zip -q -r dist/ImmersiveDialogueDisplay.zip ImmersiveDialogueDisplay
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ImmersiveDialogueDisplay.zip
+          path: dist/ImmersiveDialogueDisplay.zip
+          if-no-files-found: error
+
+      - name: Read manifest version
+        id: manifest
+        run: |
+          version="$(jq -r '.Version' manifest.json)"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check for existing release
+        id: release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.manifest.outputs.tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create GitHub release
+        if: github.ref == 'refs/heads/main' && steps.release.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.manifest.outputs.tag }}" \
+            dist/ImmersiveDialogueDisplay.zip \
+            --target "${{ github.sha }}" \
+            --title "${{ steps.manifest.outputs.tag }}" \
+            --notes "Download ImmersiveDialogueDisplay.zip and extract it into Stardew Valley/Mods."
+
+      - name: Skip existing release
+        if: github.ref == 'refs/heads/main' && steps.release.outputs.exists == 'true'
+        run: echo "${{ steps.manifest.outputs.tag }} already exists; the zip artifact was still uploaded."
