@@ -26,7 +26,7 @@ jobs:
           manifest = json.loads(Path("manifest.json").read_text())
           content = json.loads(Path("content.json").read_text())
 
-          assert manifest["UniqueID"] == "heyitsmads.ImmersiveDialogueDisplay"
+          assert manifest["UniqueID"] == "heyitsmads.ImmersiveDialogueUI"
           assert re.fullmatch(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?", manifest["Version"])
           assert manifest["ContentPackFor"]["UniqueID"] == "Pathoschild.ContentPatcher"
           assert any(
@@ -39,19 +39,19 @@ jobs:
 
       - name: Stage mod files
         run: |
-          rm -rf dist ImmersiveDialogueDisplay
-          mkdir -p dist ImmersiveDialogueDisplay
-          cp manifest.json content.json README.md ImmersiveDialogueDisplay/
-          cp -R i18n ImmersiveDialogueDisplay/
+          rm -rf dist ImmersiveDialogueUI
+          mkdir -p dist ImmersiveDialogueUI
+          cp manifest.json content.json README.md ImmersiveDialogueUI/
+          cp -R i18n ImmersiveDialogueUI/
 
       - name: Zip mod
-        run: zip -q -r dist/ImmersiveDialogueDisplay.zip ImmersiveDialogueDisplay
+        run: zip -q -r dist/ImmersiveDialogueUI.zip ImmersiveDialogueUI
 
       - name: Upload zip artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ImmersiveDialogueDisplay.zip
-          path: dist/ImmersiveDialogueDisplay.zip
+          name: ImmersiveDialogueUI.zip
+          path: dist/ImmersiveDialogueUI.zip
           if-no-files-found: error
 
       - name: Read manifest version
@@ -78,10 +78,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ steps.manifest.outputs.tag }}" \
-            dist/ImmersiveDialogueDisplay.zip \
+            dist/ImmersiveDialogueUI.zip \
             --target "${{ github.sha }}" \
             --title "${{ steps.manifest.outputs.tag }}" \
-            --notes "Download ImmersiveDialogueDisplay.zip and extract it into Stardew Valley/Mods."
+            --notes "Download ImmersiveDialogueUI.zip and extract it into Stardew Valley/Mods."
 
       - name: Skip existing release
         if: github.ref == 'refs/heads/main' && steps.release.outputs.exists == 'true'

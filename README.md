@@ -1,6 +1,6 @@
-# Immersive Dialogue Display
+# Immersive Dialogue UI
 
-Immersive Dialogue Display is a lightweight UI mod for Stardew Valley. It moves the NPC portrait outside the dialogue box, keeps the box shallow, and adds a small vanilla-style nameplate.
+Immersive Dialogue UI is a lightweight UI mod for Stardew Valley. It moves the NPC portrait outside the dialogue box, keeps the box shallow, and adds a small vanilla-style nameplate.
 
 The layout uses Stardew's own portrait, dialogue-box, name-scroll, font, and advance-indicator assets. All custom portraits are supported.
 

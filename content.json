@@ -59,7 +59,7 @@
       "Target": "aedenthorn.DialogueDisplayFramework/dictionary",
       "Entries": {
         "default": {
-          "packName": "heyitsmads.ImmersiveDialogueDisplay",
+          "packName": "heyitsmads.ImmersiveDialogueUI",
           "xOffset": "{{Round: {{Query: (1200 - {{BoxWidth}}) / 2 }} }}",
           "yOffset": "{{Round: {{Query: 384 - {{BoxHeight}} }} }}",
           "width": "{{BoxWidth}}",
