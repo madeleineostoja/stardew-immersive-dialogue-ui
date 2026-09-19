@@ -30,7 +30,7 @@ jobs:
           assert re.fullmatch(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?", manifest["Version"])
           assert manifest["ContentPackFor"]["UniqueID"] == "Pathoschild.ContentPatcher"
           assert any(
-              dependency["UniqueID"] == "aedenthorn.DialogueDisplayFramework"
+              dependency["UniqueID"] == "Mangupix.DialogueDisplayFrameworkContinued"
               and dependency.get("IsRequired") is True
               for dependency in manifest["Dependencies"]
           )
