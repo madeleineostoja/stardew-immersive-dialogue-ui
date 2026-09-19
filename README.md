@@ -17,13 +17,14 @@ The layout uses Stardew's own portrait, dialogue-box, name-scroll, font, and adv
 
 1. [SMAPI](https://smapi.io/)
 2. [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915) 2.9.0 or later
-3. [Dialogue Display Framework](https://www.nexusmods.com/stardewvalley/mods/11661) 0.5.0 or later
+3. [Dialogue Display Framework Continued (DDFC)](https://www.nexusmods.com/stardewvalley/mods/22678) 0.7.5 or later
 
 ## Installation
 
 1. Install the three requirements above.
-2. Put this folder in `Stardew Valley/Mods`.
-3. Start the game through SMAPI.
+2. Remove the original Dialogue Display Framework (`aedenthorn.DialogueDisplayFramework`) if it is installed. Use DDFC instead; do not run both frameworks together.
+3. Put this folder in `Stardew Valley/Mods`.
+4. Start the game through SMAPI.
 
 Content Patcher creates `config.json` on first launch. If Generic Mod Config Menu is installed, the same settings are available in-game.
 
@@ -38,8 +39,8 @@ Only use one Dialogue Display Framework layout pack at a time unless the packs e
 
 Box and portrait sizes are independent, so either can be changed without affecting the other. Normal matches vanilla's full 1200×384 dialogue area. The portrait sits slightly behind the top border, with the nameplate layered just beneath it and slightly inset. Changing portrait size keeps that alignment and never changes the dialogue text width or forces the box to grow.
 
-Dialogue Display Framework itself only provides an enable/disable setting. Its layout API is supplied by content packs like this one, so the remaining values are deliberately fixed rather than duplicated as low-level configuration fields.
+Dialogue Display Framework Continued itself provides framework-level settings. This pack supplies the actual layout data, so its visual values are deliberately kept here rather than duplicated as low-level configuration fields.
 
 ## Performance
 
-The pack applies one data edit and uses the framework's existing draw path. It performs no per-frame asset scans, render-target work, texture processing, or gameplay polling.
+The pack applies one data edit and uses DDFC's existing draw path. It performs no per-frame asset scans, render-target work, texture processing, or gameplay polling.

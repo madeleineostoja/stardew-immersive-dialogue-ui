@@ -2,7 +2,7 @@
   "$schema": "https://smapi.io/schemas/manifest.json",
   "Name": "Immersive Dialogue UI",
   "Author": "Madi Ostoja",
-  "Version": "0.1.1",
+  "Version": "0.1.2",
   "Description": "Immersive dialogue UI with large frameless portraits and compact dialogue boxes",
   "UniqueID": "heyitsmads.ImmersiveDialogueUI",
   "MinimumApiVersion": "4.0.0",
@@ -15,8 +15,8 @@
   },
   "Dependencies": [
     {
-      "UniqueID": "aedenthorn.DialogueDisplayFramework",
-      "MinimumVersion": "0.5.0",
+      "UniqueID": "Mangupix.DialogueDisplayFrameworkContinued",
+      "MinimumVersion": "0.7.5",
       "IsRequired": true
     }
   ]
