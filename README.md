@@ -34,7 +34,7 @@ Only use one Dialogue Display Framework layout pack at a time unless the packs e
 
 | Setting | Options | Default |
 | --- | --- | --- |
-| `BoxSize` | Compact (960×240), Normal (1200×384) | Compact |
+| `BoxSize` | Compact (1040×304), Normal (1200×384) | Compact |
 | `PortraitSize` | Small (4× vanilla), Medium (5×), Large (6×) | Medium |
 
 Box and portrait sizes are independent, so either can be changed without affecting the other. Normal matches vanilla's full 1200×384 dialogue area. The portrait sits slightly behind the top border, with the nameplate layered just beneath it and slightly inset. Changing portrait size keeps that alignment and never changes the dialogue text width or forces the box to grow.
