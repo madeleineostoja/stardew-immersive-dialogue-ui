@@ -14,7 +14,7 @@
   "DynamicTokens": [
     {
       "Name": "BoxWidth",
-      "Value": "1040"
+      "Value": "1056"
     },
     {
       "Name": "BoxWidth",
@@ -25,7 +25,7 @@
     },
     {
       "Name": "BoxHeight",
-      "Value": "304"
+      "Value": "288"
     },
     {
       "Name": "BoxHeight",
